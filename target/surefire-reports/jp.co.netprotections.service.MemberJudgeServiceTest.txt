@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: jp.co.netprotections.service.MemberJudgeServiceTest
+-------------------------------------------------------------------------------
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in jp.co.netprotections.service.MemberJudgeServiceTest
