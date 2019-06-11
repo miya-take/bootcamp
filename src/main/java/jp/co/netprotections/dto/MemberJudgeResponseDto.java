@@ -5,11 +5,16 @@ package jp.co.netprotections.dto;
 public class MemberJudgeResponseDto {
 	private String memberName;
 	private boolean enlistedPropriety;
+	private String errorMessage;
 
-//	public MemberJudgeResponseDto (String memberName, boolean enlistedPropriety){
-//		this.memberName = memberName;
-//		this.enlistedPropriety = enlistedPropriety;
-//	}
+	public MemberJudgeResponseDto (String memberName){
+		this.memberName = memberName;
+	}
+
+	public MemberJudgeResponseDto (String memberName, String errorMessage) {
+		this(memberName);
+		this.errorMessage = errorMessage;
+	}
 
 	public String getMemberName() {
 		return memberName;
@@ -26,4 +31,13 @@ public class MemberJudgeResponseDto {
 	public void setEnlistedPropriety(boolean enlistedPropriety) {
 		this.enlistedPropriety = enlistedPropriety;
 	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
 }

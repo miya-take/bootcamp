@@ -1,21 +1,31 @@
 package jp.co.netprotections.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class JudgedCandidatesResultListDto {
-	@Autowired
-	List<MemberJudgeResponseDto> judgeCandidatesResultList = new ArrayList<MemberJudgeResponseDto>();
+	private List<MemberJudgeResponseDto> judgeCandidatesResultList;
 
-	public List<MemberJudgeResponseDto> getMemberJudgeResponse() {
-		return judgeCandidatesResultList;
+	public List<MemberJudgeResponseDto> getJudgeCandidatesResultList() {
+		return this.judgeCandidatesResultList;
 	}
 
-	public void addMemberJudgeResponse(MemberJudgeResponseDto judgedMember) {
-		judgeCandidatesResultList.add(judgedMember);
+	public void setJudgeCandidatesResultList (List<MemberJudgeResponseDto> judgeCandidatesResultList) {
+		this.judgeCandidatesResultList = judgeCandidatesResultList;
 	}
+
+	/*
+	 * memo add で直接に追加することはできない
+	 * 結果を格納するリストインスタンスを生成。
+	 * そのリストを上のsetterで導入する
+	 *
+	 * なぜ、下のaddでは、それぞれの候補者の結果を挿入できないのか。＾
+	 * また、addの方法に固執せず、一度リストを生成し、それで挿入する方法を考えつかなかったのか
+	 *
+	 */
+	public void addEachCandidateResult(MemberJudgeResponseDto judgedCandidate) {
+		judgeCandidatesResultList.add(judgedCandidate);
+	}
+
 
 //	public void setMemberJudgeResponse(ArrayList judgeCandidatesResultList) {
 //		this.judgeCandidatesResultList = judgeCandidatesResultList;
