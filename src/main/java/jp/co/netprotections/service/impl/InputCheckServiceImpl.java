@@ -8,7 +8,7 @@ import jp.co.netprotections.service.InputCheckService;
 
 public class InputCheckServiceImpl  implements InputCheckService{
 	public boolean CheckEachParameter(MemberJudgeRequestDto candidate) {
-		// 名前がnullもしくは入力されていない場合の判定
+		// 名前がnullもしくは入力されていないか確認する判定
 		if (
 			candidate.getMemberName().equals(null)
 			|| candidate.getMemberName().equals("")
@@ -20,7 +20,7 @@ public class InputCheckServiceImpl  implements InputCheckService{
 		 * 2. int型で入力されているか
 		 * 3. 能力値が、0 ~ 5 の間で入力されているか
 		 */
-		// 能力値をリスト
+		// 能力値をリストで追加
 		List<Integer> candidateParameterList = new ArrayList<Integer>();
 		candidateParameterList.add(candidate.getCogitation());
 		candidateParameterList.add(candidate.getCoodination());

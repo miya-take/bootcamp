@@ -1,7 +1,5 @@
 package jp.co.netprotections.dto;
-/*
- * 様々なProjectに対すsetter/getterメソッドを持っている
- */
+
 public class MemberJudgeRequestDto {
 	private String memberName;
 	private int eventPlanning;
