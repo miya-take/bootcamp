@@ -1,26 +1,26 @@
 package jp.co.netprotections.dto;
 
 public class MemberJudgeResponseDto {
-	private String memberName;
-	private boolean enlistedPropriety;
+  private String memberName;
+  private boolean enlistedPropriety;
 
-	public MemberJudgeResponseDto (String memberName){
-		this.memberName = memberName;
-	}
+  public MemberJudgeResponseDto(String memberName) {
+    this.memberName = memberName;
+  }
 
-	public String getMemberName() {
-		return memberName;
-	}
+  public String getMemberName() {
+    return memberName;
+  }
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
+  public void setMemberName(String memberName) {
+    this.memberName = memberName;
+  }
 
-	public boolean getEnlistedPropriety() {
-		return enlistedPropriety;
-	}
+  public boolean getEnlistedPropriety() {
+    return enlistedPropriety;
+  }
 
-	public void setEnlistedPropriety(boolean enlistedPropriety) {
-		this.enlistedPropriety = enlistedPropriety;
-	}
+  public void setEnlistedPropriety(boolean enlistedPropriety) {
+    this.enlistedPropriety = enlistedPropriety;
+  }
 }

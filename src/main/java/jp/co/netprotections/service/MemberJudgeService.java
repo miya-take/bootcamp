@@ -6,7 +6,8 @@ import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
 
 
-abstract public interface MemberJudgeService {
-	abstract public boolean judgeEachMember(MemberJudgeRequestDto candidate);
-	abstract public void sortCandidatesByEnlistedPropriety(List<MemberJudgeResponseDto>judgedList);
+public abstract interface MemberJudgeService {
+  public abstract boolean judgeEachMember(MemberJudgeRequestDto candidate);
+
+  public abstract void sortCandidatesByEnlistedPropriety(List<MemberJudgeResponseDto> judgedList);
 }
