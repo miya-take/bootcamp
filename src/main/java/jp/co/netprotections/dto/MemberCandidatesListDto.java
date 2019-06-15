@@ -13,18 +13,4 @@ public class MemberCandidatesListDto {
 	public void setMemberCandidatesList (List<MemberJudgeRequestDto> memberCandidatesList) {
 		this.memberCandidatesList = memberCandidatesList;
 	}
-
-
-	public void addMemberJudgeRequest(MemberJudgeRequestDto judgedMember) {
-		memberCandidatesList.add(judgedMember);
-	}
-
-	public int getMemberJudgeRequestNumber() {
-		return memberCandidatesList.size();
-	}
-
-	public Object getEachCandidate(int i) {
-		return memberCandidatesList.get(i);
-	}
-
 }

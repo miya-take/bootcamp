@@ -19,13 +19,12 @@ import jp.co.netprotections.dto.MemberJudgeResponseDto;
 import jp.co.netprotections.service.impl.InputCheckServiceImpl;
 import jp.co.netprotections.service.impl.MemberJudgeServiceImpl;
 
-@RestController // WebAPIの機能を追加するアノテーション
+@RestController
 public class MemberJudgeController {
-	// validation
+	// 入力結果が正しいか判定するlogic
 	InputCheckServiceImpl checkInput = new InputCheckServiceImpl();
 	// 能力判定logic
 	MemberJudgeServiceImpl judgeStandard = new MemberJudgeServiceImpl();
-	//Bodyから受け付ける
 	@RequestMapping(
 			value = "/judgemember",
 			method = RequestMethod.POST,
@@ -33,29 +32,30 @@ public class MemberJudgeController {
 			)
 	@ResponseBody
 	public JudgedCandidatesResultListDto execute(@RequestBody MemberCandidatesListDto dto) throws JsonProcessingException{
-		// 最終的に返却する候補者リスト
+		// 判定対象の候補者を格納するリスト
+		List<MemberJudgeRequestDto> candidateList = new ArrayList<MemberJudgeRequestDto>();
+		candidateList.addAll(dto.getMemberCandidateList());
+
+		// 最終的にJSONで返却する候補者リスト
 		JudgedCandidatesResultListDto resultList = new JudgedCandidatesResultListDto();
 		// 一時的に判定結果を保存するリスト
 		List<MemberJudgeResponseDto> judgedList = new ArrayList<MemberJudgeResponseDto>();
 		// 候補者メンバーそれぞれを判定する
-		for(int i = 0; i< dto.getMemberJudgeRequestNumber(); i++) {
+		for(int i = 0; i< candidateList.size(); i++) {
 				// 候補者インスタンス
-				MemberJudgeRequestDto candidate = (MemberJudgeRequestDto) dto.getEachCandidate(i);
-//				System.out.println(new ObjectMapper().writeValueAsString(candidate.getMemberName().getClass()));
-				MemberJudgeResponseDto judgedCandidate = new MemberJudgeResponseDto(candidate.getMemberName(),"判定成功");
+				MemberJudgeRequestDto candidate = candidateList.get(i);
+				// 候補者の判定結果インスタンス
+				MemberJudgeResponseDto judgedCandidate = new MemberJudgeResponseDto(candidate.getMemberName());
 
 				if (checkInput.CheckEachParameter(candidate)) {
 				// 入力にエラーがないときの処理
-					judgedCandidate.setMemberName(candidate.getMemberName());
-					judgedCandidate.setEnlistedPropriety(judgeStandard.JudgeEachMember(candidate));
-					judgedList.add(judgedCandidate);
+					judgedCandidate.setEnlistedPropriety(judgeStandard.judgeEachMember(candidate));
 				} else {
-					// 入力にエラーがあったときの処理
+				// 入力にエラーがあったときの処理
 					judgedCandidate.setMemberName(null);
-					judgedCandidate.setErrorMessage("入力した値に誤りがあります");
 					judgedCandidate.setEnlistedPropriety(false);
-					judgedList.add(judgedCandidate);
 				}
+			judgedList.add(judgedCandidate);
 		}
 		judgeStandard.sortCandidatesByEnlistedPropriety(judgedList);
 		resultList.setJudgeCandidatesResultList(judgedList);
