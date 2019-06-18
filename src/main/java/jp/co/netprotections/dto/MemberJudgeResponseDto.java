@@ -4,10 +4,6 @@ public class MemberJudgeResponseDto {
   private String memberName;
   private boolean enlistedPropriety;
 
-  public MemberJudgeResponseDto(String memberName) {
-    this.memberName = memberName;
-  }
-
   public String getMemberName() {
     return memberName;
   }
