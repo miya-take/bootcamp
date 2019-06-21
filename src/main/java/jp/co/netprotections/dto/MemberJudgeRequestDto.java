@@ -1,5 +1,8 @@
 package jp.co.netprotections.dto;
 
+/**
+ *
+ */
 public class MemberJudgeRequestDto {
   private String memberName;
   private int eventPlanning;

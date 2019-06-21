@@ -3,6 +3,7 @@ package jp.co.netprotections.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,37 +11,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import jp.co.netprotections.dto.JudgedCandidatesResultListDto;
 import jp.co.netprotections.dto.MemberCandidatesListDto;
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
-import jp.co.netprotections.service.impl.InputCheckServiceImpl;
-import jp.co.netprotections.service.impl.MemberJudgeServiceImpl;
+import jp.co.netprotections.service.InputCheckService;
+import jp.co.netprotections.service.MemberJudgeService;
 
 
 
-
+/**
+ *
+ * @author s.nozaki
+ *
+ */
 @RestController
 public class MemberJudgeController {
-  // 入力結果が正しいか判定するlogic
-  InputCheckServiceImpl checkInput = new InputCheckServiceImpl();
-  // 能力判定logic
-  MemberJudgeServiceImpl judgeStandard = new MemberJudgeServiceImpl();
+  @Autowired
+  private InputCheckService inputCheckService;
+  @Autowired
+  private MemberJudgeService memberJudgeService;
 
-  @RequestMapping(
-      value = "/judgemember",
-      method = RequestMethod.POST,
-      consumes = MediaType.APPLICATION_JSON_VALUE
-      )
-
+  /**
+   * 判定
+   */
+  @RequestMapping(value = "/judgemember", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public JudgedCandidatesResultListDto execute(@RequestBody MemberCandidatesListDto dto)
-      throws JsonProcessingException {
+  public JudgedCandidatesResultListDto execute(@RequestBody MemberCandidatesListDto dto) throws Exception {
     // 判定対象の候補者を格納するリスト
-    List<MemberJudgeRequestDto> candidateList = new ArrayList<MemberJudgeRequestDto>();
-    candidateList.addAll(dto.getMemberCandidateList());
+    List<MemberJudgeRequestDto> candidateList = dto.getMemberCandidateList();
 
     // 最終的にJSONで返却する候補者リスト
     JudgedCandidatesResultListDto resultList = new JudgedCandidatesResultListDto();
@@ -51,12 +50,12 @@ public class MemberJudgeController {
       // 候補者インスタンス
       MemberJudgeRequestDto candidate = candidateList.get(i);
       // 候補者の判定結果インスタンス
-      MemberJudgeResponseDto judgedCandidate = new MemberJudgeResponseDto(
-          candidate.getMemberName());
+      MemberJudgeResponseDto judgedCandidate = new MemberJudgeResponseDto();
+      judgedCandidate.setMemberName(candidate.getMemberName());
 
-      if (checkInput.checkEachParameter(candidate)) {
+      if (inputCheckService.isExpectedParameter(candidate)) {
         // 入力にエラーがないときの処理
-        judgedCandidate.setEnlistedPropriety(judgeStandard.judgeEachMember(candidate));
+        judgedCandidate.setEnlistedPropriety(memberJudgeService.judgeEachMember(candidate));
       } else {
         // 入力にエラーがあったときの処理
         judgedCandidate.setMemberName(null);
@@ -64,7 +63,7 @@ public class MemberJudgeController {
       }
       judgedList.add(judgedCandidate);
     }
-    judgeStandard.sortCandidatesByEnlistedPropriety(judgedList);
+    memberJudgeService.sortCandidatesByEnlistedPropriety(judgedList);
     resultList.setJudgeCandidatesResultList(judgedList);
     return resultList;
   }
