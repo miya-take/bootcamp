@@ -11,7 +11,7 @@ public class MemberJudgeRequestDto {
   private int programmingAbility;
   private int infrastructureKnowledge;
 
-  MemberJudgeRequestDto(
+  public MemberJudgeRequestDto(
       String memberName,
       int eventPlanning,
       int cogitation,
