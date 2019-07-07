@@ -15,7 +15,6 @@ import jp.co.netprotections.dto.JudgedCandidatesResultListDto;
 import jp.co.netprotections.dto.MemberCandidatesListDto;
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
-import jp.co.netprotections.service.InputCheckService;
 import jp.co.netprotections.service.MemberJudgeService;
 
 
@@ -26,12 +25,9 @@ import jp.co.netprotections.service.MemberJudgeService;
  *
  */
 @RestController
-public class MemberJudgeController {
-  @Autowired
-  private InputCheckService inputCheckService;
-  @Autowired
-  private MemberJudgeService memberJudgeService;
-
+public class MemberJudgeController {  
+    @Autowired
+    private MemberJudgeService memberJudgeService;
   /**
    * 判定
    */
@@ -40,30 +36,12 @@ public class MemberJudgeController {
   public JudgedCandidatesResultListDto execute(@RequestBody MemberCandidatesListDto dto) throws Exception {
     // 判定対象の候補者を格納するリスト
     List<MemberJudgeRequestDto> candidateList = dto.getMemberCandidateList();
-
-    // 最終的にJSONで返却する候補者リスト
-    JudgedCandidatesResultListDto resultList = new JudgedCandidatesResultListDto();
     // 一時的に判定結果を保存するリスト
     List<MemberJudgeResponseDto> judgedList = new ArrayList<MemberJudgeResponseDto>();
-    // 候補者メンバーそれぞれを判定する
-    for (int i = 0; i < candidateList.size(); i++) {
-      // 候補者インスタンス
-      MemberJudgeRequestDto candidate = candidateList.get(i);
-      // 候補者の判定結果インスタンス
-      MemberJudgeResponseDto judgedCandidate = new MemberJudgeResponseDto();
-      judgedCandidate.setMemberName(candidate.getMemberName());
-
-      if (inputCheckService.isExpectedParameter(candidate)) {
-        // 入力にエラーがないときの処理
-        judgedCandidate.setEnlistedPropriety(memberJudgeService.judgeEachMember(candidate));
-      } else {
-        // 入力にエラーがあったときの処理
-        judgedCandidate.setMemberName(null);
-        judgedCandidate.setEnlistedPropriety(false);
-      }
-      judgedList.add(judgedCandidate);
-    }
-    memberJudgeService.sortCandidatesByEnlistedPropriety(judgedList);
+    JudgedCandidatesResultListDto resultList = new JudgedCandidatesResultListDto();
+    
+    judgedList = this.memberJudgeService.judge(candidateList);
+    this.memberJudgeService.sortCandidatesByEnlistedPropriety(judgedList);
     resultList.setJudgeCandidatesResultList(judgedList);
     return resultList;
   }

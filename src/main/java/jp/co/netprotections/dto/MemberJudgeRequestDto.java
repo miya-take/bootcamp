@@ -1,7 +1,9 @@
 package jp.co.netprotections.dto;
 
+
 /**
- *
+ * @author t.miyazawa
+ * @
  */
 public class MemberJudgeRequestDto {
   private String memberName;
@@ -11,7 +13,7 @@ public class MemberJudgeRequestDto {
   private int programmingAbility;
   private int infrastructureKnowledge;
 
-  MemberJudgeRequestDto(
+  public MemberJudgeRequestDto(
       String memberName,
       int eventPlanning,
       int cogitation,

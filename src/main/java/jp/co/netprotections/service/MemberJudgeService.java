@@ -6,12 +6,24 @@ import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
 
 /**
+ * @author t.miyazawa
  * 隊員判定サービス
+ * 
  */
 public interface MemberJudgeService {
 
+	/**
+	 * 候補者一人ひとりを判定する
+	 * @param candidate
+	 * @return　入退社可否結果
+	 */
 	public boolean judgeEachMember(MemberJudgeRequestDto candidate);
 
+    /**
+     * 判定結果をもとに、隊員をソートする
+     * @param list 判定結果リスト（ソート前）
+     * @return list 判定結果リスト（ソート後）
+     */
     public void sortCandidatesByEnlistedPropriety(List<MemberJudgeResponseDto> judgedList);
 
     /**

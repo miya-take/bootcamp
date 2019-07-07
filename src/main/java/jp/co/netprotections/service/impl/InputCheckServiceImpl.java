@@ -3,12 +3,15 @@ package jp.co.netprotections.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.service.InputCheckService;
 
 /**
  * 入力チェックサービス実装クラス
  */
+@Service
 public class InputCheckServiceImpl  implements InputCheckService {
 
 	  public boolean isExpectedParameter(MemberJudgeRequestDto candidate) {
