@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.netprotections.dto.JudgedCandidatesResultListDto;
+import jp.co.netprotections.dto.MemberCandidatesListDto;
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
 import jp.co.netprotections.service.MemberJudgeService;
@@ -88,5 +90,37 @@ public class MemberJudgeServiceImpl implements MemberJudgeService {
 				res.add(result);
 		}
 		return res;
+	}
+	
+	/**
+	 *　controllerで行なっていた処理も、こちらに全てまとめたメンバー判定メソッド
+	 *　@author t.miyazawa
+	 *  @param 候補者のリスト
+	 *  @return 判定結果リスト
+	 */
+	@Override
+	 public JudgedCandidatesResultListDto judgeAll(MemberCandidatesListDto candidateList) {
+		 // 判定対象の候補者を格納するリスト
+		List<MemberJudgeRequestDto> candidateListFix = candidateList.getMemberCandidateList();
+		// 判定結果を一時的に収納するリスト
+		List<MemberJudgeResponseDto> tempResult = new ArrayList<>();
+		// 最終的に返却する結果のリスト
+		JudgedCandidatesResultListDto resultList = new JudgedCandidatesResultListDto();
+		for(MemberJudgeRequestDto elm : candidateListFix) {
+			MemberJudgeResponseDto result = new MemberJudgeResponseDto();
+			 if (inputCheckService.isExpectedParameter(elm)) {
+			        // 入力にエラーがないときの処理
+				 	result.setEnlistedPropriety(this.judgeEachMember(elm));
+					result.setMemberName(elm.getMemberName());
+			      } else {
+			        // 入力にエラーがあったときの処理
+			        result.setMemberName(null);
+			        result.setEnlistedPropriety(false);
+			      } 
+				tempResult.add(result);
+		}
+		this.sortCandidatesByEnlistedPropriety(tempResult);
+		resultList.setJudgeCandidatesResultList(tempResult);
+		return resultList;
 	}
 }

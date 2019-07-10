@@ -4,6 +4,8 @@ import java.util.List;
 
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
 import jp.co.netprotections.dto.MemberJudgeResponseDto;
+import jp.co.netprotections.dto.JudgedCandidatesResultListDto;
+import jp.co.netprotections.dto.MemberCandidatesListDto;
 
 /**
  * @author t.miyazawa
@@ -32,4 +34,10 @@ public interface MemberJudgeService {
      * @return 判定結果リスト
      */
     public List<MemberJudgeResponseDto> judge(List<MemberJudgeRequestDto> list);
+    
+    /**
+     * @param candidateList
+     * @return 判定結果リスト
+     */
+    public JudgedCandidatesResultListDto judgeAll(MemberCandidatesListDto candidateList);
 }
