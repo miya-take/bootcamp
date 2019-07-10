@@ -21,5 +21,4 @@ public class MemberJudgeControllerTest {
 	public void setup() {
 		mockMvc = MockMvcBuilders.standaloneSetup(targetController).build();
 	}
-	
 }
