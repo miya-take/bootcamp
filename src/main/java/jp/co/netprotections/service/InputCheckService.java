@@ -1,7 +1,7 @@
 package jp.co.netprotections.service;
 
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
-
+/** test
 /**
  * 入力チェックサービス
  * @author s.nozaki
