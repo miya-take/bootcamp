@@ -15,4 +15,16 @@ public interface InputCheckService {
 	 * @return 判定結果
 	 */
     public boolean isExpectedParameter(MemberJudgeRequestDto candidate);
+    /**
+     * 名前が適正であるかどうか確認する
+     * @param name
+     * @return 
+     */
+    public boolean checkName(String name);
+    /**
+     * それぞれの能力値が条件を満たしているか確認する
+     * @param eachParamater
+     * @return
+     */
+    public boolean checkEachAbility(int eachParamater);
 }

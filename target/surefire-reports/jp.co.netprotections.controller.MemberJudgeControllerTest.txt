@@ -1,4 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: jp.co.netprotections.controller.MemberJudgeControllerTest
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s - in jp.co.netprotections.controller.MemberJudgeControllerTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.218 s <<< FAILURE! - in jp.co.netprotections.controller.MemberJudgeControllerTest
+initializationError(jp.co.netprotections.controller.MemberJudgeControllerTest)  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.Exception: No runnable methods
+
