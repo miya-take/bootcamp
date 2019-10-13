@@ -58,7 +58,7 @@ public class InputCheckServiceImpl implements InputCheckService {
 
 	@Override
 	public boolean checkEachAbility(int eachParamater) {
-		if (eachParamater == 0 || eachParamater < 0 || 5 < eachParamater) {
+		if (eachParamater <= 0 || 5 < eachParamater) {
 			return false;
 		} else {
 			return true;
