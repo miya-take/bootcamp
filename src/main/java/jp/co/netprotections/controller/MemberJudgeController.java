@@ -13,16 +13,14 @@ import jp.co.netprotections.dto.MemberCandidatesListDto;
 import jp.co.netprotections.service.MemberJudgeService;
 
 /**
- *
- * @author s.nozaki
- *
+ * @author t.miyazawa
  */
 @RestController
 public class MemberJudgeController {  
-    @Autowired
-    private MemberJudgeService memberJudgeService;
+  @Autowired
+  private MemberJudgeService memberJudgeService;
   /**
-   * 判定
+   * 判定を行う
    */
   @RequestMapping(value = "/judgemember", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: jp.co.netprotections.service.MemberJudgeServiceTest
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in jp.co.netprotections.service.MemberJudgeServiceTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in jp.co.netprotections.service.MemberJudgeServiceTest
+initializationError(jp.co.netprotections.service.MemberJudgeServiceTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Method setUp() should be public
+
+initializationError(jp.co.netprotections.service.MemberJudgeServiceTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Method testMemberJudge should have no parameters
+

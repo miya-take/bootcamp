@@ -2,15 +2,12 @@ package jp.co.netprotections.dto;
 
 import java.util.List;
 
+import lombok.Data;
 
+/**
+ * @author t.miyazawa 入退社候補者リストのDTO
+ */
+@Data
 public class MemberCandidatesListDto {
-  private List<MemberJudgeRequestDto> memberCandidatesList;
-
-  public List<MemberJudgeRequestDto> getMemberCandidateList() {
-    return this.memberCandidatesList;
-  }
-
-  public void setMemberCandidatesList(List<MemberJudgeRequestDto> memberCandidatesList) {
-    this.memberCandidatesList = memberCandidatesList;
-  }
+	private List<MemberJudgeRequestDto> memberCandidatesList;
 }
