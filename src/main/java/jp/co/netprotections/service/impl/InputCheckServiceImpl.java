@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.netprotections.dto.MemberJudgeRequestDto;
@@ -13,12 +12,13 @@ import jp.co.netprotections.resources.Messages;
 import jp.co.netprotections.service.InputCheckService;
 
 /**
- * 入力チェックサービス実装クラス
+ * @author t.miyazawa
+ *
  */
 @Service
 public class InputCheckServiceImpl implements InputCheckService {
 	private Logger logger = LoggerFactory.getLogger(InputCheckServiceImpl.class);
-	Messages messages = new Messages();
+	private Messages messages = new Messages();
 
 	public boolean isExpectedParameter(MemberJudgeRequestDto candidate) {
 		// 名前に不正がないか検証

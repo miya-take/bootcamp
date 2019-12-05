@@ -17,6 +17,9 @@ import jp.co.netprotections.service.MemberJudgeService;
 
 /**
  * 隊員判定サービス実装クラス
+ * 
+ * @author t.miyazawa
+ *
  */
 @Service
 public class MemberJudgeServiceImpl implements MemberJudgeService {
